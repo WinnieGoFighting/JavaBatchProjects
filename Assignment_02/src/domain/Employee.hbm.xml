@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- root tag-->
+<hibernate-mapping>
+	<!--name:complete java class name -->
+	<!--table:table name in SQL-->
+	<!--catalog: database name -->
+	<class name="domain.Employee" table="employee">
+	
+	<!--set cache strategy  -->
+	<cache usage = "read-only"/>
+	
+	<!-- primary key -->
+	<!-- attributes: name,column, length, type -->
+	<id name="employee_Id" column="employee_Id">
+		<generator class="native"/>
+	</id>
+	
+	<!--property -->
+	<!-- name: attribute name in java class -->
+	<!-- column:column name in table -->
+	<!-- length: for table auto creation-->
+	<!-- type: -->
+	<!-- not-null: -->
+	<!-- unique: -->
+	<property name="name" column="name" length="50" not-null="true"/>
+	<property name="email" column="email" length ="100"/>
+	<property name="age" column="age" />
+	
+	<!-- many to many relationship -->
+	<!-- name: 对方的集合的属性名称 -->
+	<!-- table:多对多关系需要使用中间表，放的是中间表的名称 -->
+	<!-- column: 当前对象对应的中间标的名称 -->
+	<!-- many-to-many:class:对方类的全路径 -->
+	<!-- cascade:使用employee级联保存project,此时session只save employe就可以了 -->	
+	<set name="projects" table="emp_pro" cascade="save-update">
+		<key column="emp_id"></key>
+		<many-to-many class="domain.Project" column="pro_id"></many-to-many>
+	</set>	
+	</class> 
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--交给spring来管理（spring c3p0 连接池）-->
+<!--    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql:///db_hibernate</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">12345</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
+
+        <!-- print SQL query -->
+        <property name="hibernate.show_sql">true</property>
+        <!-- format SQL query -->
+        <property name="hibernate.format_sql">true</property>
+        <!-- auto create table in SQL -->
+        <!-- auto 有以下取值 -->
+        <!-- none: 不使用hibernate的自动建表-->
+        <!-- create： 如果数据库中已经有表， 删除原有表，重新创建，如果没有表，新建表（测试）-->
+        <!-- create-drop：如果数据库中已经有表， 删除原有表，重新创建，并且再删除表。如果没有表，新建一个，使用完了再删除 （测试）-->
+        <!-- update：如果数据库中有表，使用原有表，如果没有，创建新表（更新表结构） -->
+        <!-- validate：如果没有表，不会创建表，只会使用数据库原有的表（校验映射和表结构是否一致）-->
+        <property name = "hibernate.hbm2ddl.auto">update</property>
+
+        <!-- set isolation level for transaction -->
+        <!--1 read uncommitted  -->
+        <!--2 read committed <default for oracle> -->
+        <!--4 repeatable read <default for MYSQL> -->
+        <!--8 serializable-->
+        <property name="hibernate.connection.isolation">4</property>
+
+        <!-- session绑定在当前线程 -->
+<!--        <property name="hibernate.current_session_context_class">thread</property>-->
+
+        <!-- set the second-level cache -->
+<!--        <property name="hibernate.cache.use_second_level_cache">true</property>-->
+<!--        <property name="hibernate.javax.cache.provider">net.sf.ehcache.hibernate.EhCacheProvider</property>-->
+<!--        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>-->
+
+        <mapping resource="Course.hbm.xml"/>
+        <mapping resource="Student.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
