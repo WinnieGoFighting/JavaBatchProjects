@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- root tag-->
+<hibernate-mapping>
+    <!--name:complete java class name -->
+    <!--table:table name in SQL-->
+    <!--catalog: database name -->
+    <class name="domain.Student" table="students">
+
+        <!--set cache strategy  -->
+<!--        <cache usage = "read-only"/>-->
+
+        <!-- primary key -->
+        <!-- attributes: name,column, length, type -->
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+
+        <!--property -->
+        <!-- name: attribute name in java class -->
+        <!-- column:column name in table -->
+        <!-- length: for table auto creation-->
+        <!-- type: -->
+        <!-- not-null: -->
+        <!-- unique: -->
+        <property name="firstName" column="firstname" length="100"/>
+        <property name="lastName" column="lastname" length ="100"/>
+        <property name="email" column="email" length ="100"/>
+        <property name="password" column="password" />
+
+        <!-- many to many relationship -->
+        <!-- name: 对方的集合的属性名称 -->
+        <!-- table:多对多关系需要使用中间表，放的是中间表的名称 -->
+        <!-- column: 当前对象对应的中间表的名称 -->
+        <!-- many-to-many:class:对方类的全路径 -->
+        <!-- cascade:使用employee级联保存project,此时session只save employe就可以了 -->
+        <set name="courses" table="student_course">
+            <key column="sid"></key>
+            <many-to-many class="domain.Course" column="cid"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

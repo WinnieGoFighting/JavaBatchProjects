@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="domain.Course" table="courses">
+        <!-- primary key -->
+        <id name="cid" column="cid">
+            <generator class="native"/>
+        </id>
+        <property name="courseName" column="coursename"/>
+        <property name="department" column="department"/>
+        <set name="students" table="student_course" inverse="true">
+            <key column="cid"></key>
+            <many-to-many class="domain.Student" column="sid"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
